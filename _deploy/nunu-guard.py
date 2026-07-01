@@ -18,7 +18,7 @@ Tiers:
                 dir; any command whose leading tool isn't on the allowlist. Fail-closed. Eli-override
                 via #ELI_OK for the soft ones only.
 """
-import sys, json, os, re, shlex
+import sys, json, os, re, shlex, datetime
 
 WORK = "/Users/nunu"
 WIKI = "/users/nunu/nunu/wiki"  # lowercased; NUNU's own wiki repo — git push here is auto-approved
@@ -53,14 +53,30 @@ PROTECTED_FILES = {
 }
 PROTECTED_BASENAMES = ("nunu-guard.py", "settings.local.json", "settings.json")
 
+# Decision logging — every allow/block written to a log so we can tune the allow-list to REAL usage
+# (add what got wrongly blocked, strip what's never used) before locking the guard down. Fails silently.
+LOG_PATH = "/Users/nunu/nunu/ops/logs/guard.log"
+TOOL = "?"
+
+
+def _log(verdict, reason):
+    try:
+        ts = datetime.datetime.now().isoformat(timespec="seconds")
+        with open(LOG_PATH, "a") as f:
+            f.write(f"{ts} {verdict:5} {TOOL} :: {reason}\n")
+    except Exception:
+        pass
+
 
 def allow(reason):
+    _log("ALLOW", reason)
     print(json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse",
           "permissionDecision": "allow", "permissionDecisionReason": reason}}))
     sys.exit(0)
 
 
 def block(reason):
+    _log("BLOCK", reason)
     print(json.dumps({"hookSpecificOutput": {"hookEventName": "PreToolUse",
           "permissionDecision": "deny", "permissionDecisionReason": reason}}))
     sys.stderr.write(reason + "\n")
@@ -149,11 +165,13 @@ def _targets_protected(cmd):
 
 
 def main():
+    global TOOL
     try:
         data = json.load(sys.stdin)
     except Exception:
         sys.exit(0)
     tool = data.get("tool_name", "")
+    TOOL = tool or "?"
     inp = data.get("tool_input", {}) or {}
 
     if tool == "AskUserQuestion":
