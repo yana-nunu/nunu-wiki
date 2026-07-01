@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__plugin_discord_discord__reply",
+      "WebSearch",
+      "WebFetch"
+    ],
+    "deny": [
+      "AskUserQuestion"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          { "type": "command", "command": "/usr/bin/python3 /Users/nunu/nunu/ops/nunu-guard.py" }
+        ]
+      }
+    ]
+  }
+}
