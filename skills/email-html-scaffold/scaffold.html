@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+  NUNU EDM scaffold — email-safe, HubSpot-importable. Fill the {{PLACEHOLDERS}} per project from
+  that project's guidelines + Claude Design reference. Rules: keep tables, keep CSS inline on elements
+  (the <style> block is progressive-enhancement only — assume it's stripped by some clients), ~600px,
+  single column. Test in Outlook (Windows), Gmail, Apple Mail, iOS, and dark mode before handing to Yana.
+  Do NOT add JS, external stylesheets, flexbox, grid, or float. Replace hosted image URLs with real ones.
+-->
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark">
+  <title>{{EMAIL_TITLE}}</title>
+  <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]-->
+  <style>
+    /* Progressive enhancement only — never rely on this block. */
+    body { margin:0; padding:0; width:100% !important; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    table { border-collapse:collapse !important; }
+    img { border:0; height:auto; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; }
+    a { text-decoration:none; }
+    @media only screen and (max-width:600px) {
+      .container { width:100% !important; }
+      .px { padding-left:24px !important; padding-right:24px !important; }
+      .stack { display:block !important; width:100% !important; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .bg { background:#111111 !important; }
+      .txt { color:#eeeeee !important; }
+    }
+  </style>
+</head>
+<!-- Set brand bg + text colours from the project's Claude Design reference. -->
+<body class="bg" style="margin:0; padding:0; background-color:#f4f2ee;">
+  <!-- Preheader: the inbox preview line. Make it specific to THIS project, not generic. -->
+  <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:#f4f2ee;">
+    {{PREHEADER_TEXT}}
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f2ee;">
+    <tr>
+      <td align="center" style="padding:24px 12px;">
+
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px;">
+
+          <!-- HEADER / LOGO -->
+          <tr>
+            <td class="px" align="left" style="padding:8px 40px 24px;">
+              <img src="{{LOGO_URL}}" width="140" alt="{{PROJECT_OR_FRANK_NAME}}" style="display:block; width:140px; max-width:140px;">
+            </td>
+          </tr>
+
+          <!-- HERO -->
+          <tr>
+            <td>
+              <img src="{{HERO_IMAGE_URL}}" width="600" alt="{{HERO_ALT_DESCRIBE_THE_SCENE}}" style="display:block; width:100%; max-width:600px; height:auto;">
+            </td>
+          </tr>
+
+          <!-- HEADLINE — must be ownable to THIS project. No generic superlatives. -->
+          <tr>
+            <td class="px bg txt" align="left" style="background-color:#ffffff; padding:40px 40px 8px; font-family:Georgia,'Times New Roman',serif; font-size:30px; line-height:38px; color:#1a1a1a; font-weight:normal;">
+              {{HEADLINE}}
+            </td>
+          </tr>
+
+          <!-- BODY — 1 to 3 concrete sections. Real reasons, sourced from the project. -->
+          <tr>
+            <td class="px bg txt" align="left" style="background-color:#ffffff; padding:16px 40px 8px; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:26px; color:#333333;">
+              {{BODY_PARAGRAPH_1}}
+            </td>
+          </tr>
+          <tr>
+            <td class="px bg txt" align="left" style="background-color:#ffffff; padding:8px 40px 24px; font-family:Arial,Helvetica,sans-serif; font-size:16px; line-height:26px; color:#333333;">
+              {{BODY_PARAGRAPH_2_OPTIONAL}}
+            </td>
+          </tr>
+
+          <!-- CTA — one primary action. Bulletproof button (VML for Outlook). Set brand colour. -->
+          <tr>
+            <td class="bg" align="left" style="background-color:#ffffff; padding:8px 40px 44px;">
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr><td align="center" bgcolor="#1a1a1a" style="border-radius:2px;">
+                  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{CTA_URL}}" style="height:52px;v-text-anchor:middle;width:240px;" arcsize="4%" fillcolor="#1a1a1a" strokecolor="#1a1a1a"><w:anchorlock/><center style="color:#ffffff;font-family:Arial,sans-serif;font-size:15px;letter-spacing:1px;"><![endif]-->
+                  <a href="{{CTA_URL}}" style="display:inline-block; padding:16px 40px; font-family:Arial,Helvetica,sans-serif; font-size:15px; letter-spacing:1px; color:#ffffff; background-color:#1a1a1a; border-radius:2px;">{{CTA_LABEL}}</a>
+                  <!--[if mso]></center></v:roundrect><![endif]-->
+                </td></tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- FOOTER — HubSpot requires unsubscribe + physical address, or it won't send. -->
+          <tr>
+            <td class="px" align="left" style="padding:28px 40px; font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#888888;">
+              {{ANY_LEGAL_OR_COMPLIANCE_LINE_FROM_GUIDELINES}}<br><br>
+              {{FRANK_ADDRESS}}<br>
+              <a href="{{HUBSPOT_UNSUBSCRIBE_TOKEN}}" style="color:#888888; text-decoration:underline;">Unsubscribe</a> &nbsp;·&nbsp;
+              <a href="{{PREFERENCES_URL}}" style="color:#888888; text-decoration:underline;">Update preferences</a>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
