@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.nunu.agent</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/nunu/nunu/ops/nunu-guardian.sh</string>
+  </array>
+
+  <!-- Start at login, and keep the guardian itself alive. Loaded UNDER the nunu user
+       (LaunchAgent in /Users/nunu/Library/LaunchAgents/), runs in nunu's session via
+       Fast User Switching while momo is foreground. -->
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+
+  <key>StandardOutPath</key>
+  <string>/Users/nunu/nunu/ops/logs/guardian.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/nunu/nunu/ops/logs/guardian.err.log</string>
+
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/Users/nunu/.local/bin:/Users/nunu/.bun/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+</dict>
+</plist>
